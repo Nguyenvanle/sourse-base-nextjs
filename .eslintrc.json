@@ -1,0 +1,127 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "eslint:recommended",
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": ["check-file", "simple-import-sort", "tailwindcss"],
+  "rules": {
+    "semi": [1, "always"],
+    "quotes": [1, "double"],
+    "eol-last": [1, "always"],
+    "no-multiple-empty-lines": [1, { "max": 1 }],
+    "object-curly-spacing": [1, "always"],
+
+    "import/order": "off",
+    "import/named": "off",
+    "@typescript-eslint/no-require-imports": "off",
+    "import/no-unresolved": "off",
+    "simple-import-sort/exports": "off",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          ["^react", "^react-dom"],
+          ["^next"],
+          ["^@?\\w"],
+          ["^~/constants"],
+          ["^~/services"],
+          ["^~/stores"],
+          ["^~/types"],
+          ["^~/utils"],
+          ["^~/libs"],
+          ["^~/providers"],
+          ["^~/hooks"],
+          ["^~/components"],
+          ["^~/styles"],
+          ["^~/pages"],
+          ["^~/queries"],
+          ["^[./]"]
+        ]
+      }
+    ],
+
+    "tailwindcss/classnames-order": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "none",
+        "ignoreRestSiblings": true
+      }
+    ],
+
+    "prefer-const": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
+
+    "check-file/filename-naming-convention": [
+      "error",
+      {
+        "**/src/*.{jsx,tsx,js,ts}": "KEBAB_CASE"
+      }
+    ],
+    "check-file/folder-naming-convention": [
+      "error",
+      {
+        "src/**/": "KEBAB_CASE"
+      }
+    ]
+  },
+  "settings": {
+    "tailwindcss": {
+      "callees": ["clsx", "classnames"],
+      "groupByResponsive": true
+    }
+  },
+  "ignorePatterns": ["node_modules/", ".next/", "dist/", "build/"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js"],
+      "parser": "@typescript-eslint/parser"
+    },
+    {
+      "files": ["src/**/*.{ts,tsx}"],
+      "rules": {
+        "@typescript-eslint/no-require-imports": "warn"
+      }
+    },
+    {
+      "files": ["src/pages/_*.tsx"],
+      "rules": {
+        "check-file/filename-naming-convention": "off"
+      }
+    },
+    {
+      "files": [
+        "**/{services,controllers,models,types,providers,hooks,libs,utils,constants,queries,stores}/**"
+      ],
+      "rules": {
+        "check-file/filename-naming-convention": [
+          "error",
+          {
+            "**/hooks/*.ts": "use**.hook",
+            "**/providers/*.tsx": "**.provider",
+            "**/services/*.ts": "**.service",
+            "**/controllers/*.ts": "**.controller",
+            "**/models/*.ts": "**.model",
+            "**/types/*.ts": "**.d",
+            "**/libs/*.ts": "**.lib",
+            "**/utils/*.ts": "**.util",
+            "**/constants/*.ts": "**.const",
+            "**/queries/*.ts": "**.query",
+            "**/stores/*.ts": "**.store"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/**/index.{ts,tsx}"],
+      "rules": {
+        "check-file/filename-naming-convention": "off"
+      }
+    }
+  ]
+}
